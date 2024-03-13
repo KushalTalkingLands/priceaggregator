@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param
 import { Plot } from 'src/core/interface/plot.interface';
 import { PlotService } from './plot.service';
 import { PlotAggregationDto } from 'src/core/dto/priceAggregation.dto';
+import { LoggerConstant } from 'src/core/constants/loggerConstant';
 
 @Controller('plot')
 export class PlotController {
@@ -10,11 +11,11 @@ export class PlotController {
 
   @Post()
   async create(@Body() plot: Plot): Promise<Plot> {
-    this.logger.log(`Creating plot with data: ${JSON.stringify(plot)}`);
+    this.logger.log(LoggerConstant.CreatePlotController);
     // return this.plotService.create(plot);
     try {
       const createdPlot = await this.plotService.create(plot);
-      this.logger.log(`Plot created: ${JSON.stringify(createdPlot)}`);
+      this.logger.log(LoggerConstant.PlotCreated);
       return createdPlot;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
@@ -23,7 +24,7 @@ export class PlotController {
 
   @Get('aggregateByPrice')
   async aggregateByPrice(@Query() plotAggregationDto: PlotAggregationDto): Promise<Plot[]> {
-    this.logger.log(`Aggregating plots by price with parameters: ${JSON.stringify(plotAggregationDto)}`);
+    this.logger.log(LoggerConstant.PlotAggregationController);
     try {
       plotAggregationDto.pricePerSqft = Number(plotAggregationDto.pricePerSqft);
       plotAggregationDto.minPrice = Number(plotAggregationDto.minPrice);
@@ -37,7 +38,7 @@ export class PlotController {
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() plot: Plot): Promise<Plot> {
-    this.logger.log(`Updating plot with ID ${id} with data: ${JSON.stringify(plot)}`);
+    this.logger.log(LoggerConstant.UpdatePlotController);
     try {
       const updatedPlot = await this.plotService.update(id, plot);
       return updatedPlot;
@@ -48,7 +49,7 @@ export class PlotController {
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<void> {
-    this.logger.log(`Deleting plot with ID ${id}`);
+    this.logger.log(LoggerConstant.DeletePlotController);
     try {
       await this.plotService.delete(id);
     } catch (error) {

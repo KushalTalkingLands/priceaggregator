@@ -1,0 +1,38 @@
+export class LoggerConstant{
+    public static readonly CreatePlotController = "Creation Plot Initiated in controller"
+    public static readonly PlotCreated = "Plot Created"
+    public static readonly PlotAggregationController = "Plot Aggregation Initiated in controller"
+    public static readonly UpdatePlotController = "Updation Plot Initiated in controller"
+    public static readonly DeletePlotController = "Deletion of Plot Initiated in controller"
+
+    //Loggers in Service
+    public static readonly CreatePlotService = "Creation Plot Initiated in service"
+    public static readonly CreatePlotServiceError = "There is some error in Creation Plot"
+    public static readonly FindAllService = "Find All Plot Initiated in service"
+    public static readonly FindAllServiceError = "There is some error in Finding all plots"
+    public static readonly FindOneService = "Find One Plot Initiated in service"
+    public static readonly FindOneServiceError = "There is some error in finding one plot"
+    public static readonly FindOneAlreadyExistError = "The plot with given id does not exist"
+    public static readonly UpdatePlotService = "Updation Plot Initiated in service"
+    public static readonly UpdatePlotErrorService = "There is some error in updating plot in service"
+    public static readonly DeletePlotService = "Property Deletion initiated in service"
+    public static readonly DeletePlotErrorService = "There is some issue in plot deletion in service"
+    public static readonly PlotAggregationService = "Plot Aggregation Initiated in Service"
+    public static readonly PlotAggregationErrorService = "There is some error Plot Aggregation in Service"
+
+    //Loggers in Dao
+    public static readonly CreatePlotDao = "Creation Plot Initiated in service"
+    public static readonly CreatePlotDaoError = "There is some error in Creation Plot"
+    public static readonly FindAllDao = "Find All Plot Initiated in Dao"
+    public static readonly FindAllDaoError = "There is some error in Finding all plots"
+    public static readonly FindOneDao = "Find One Plot Initiated in Dao"
+    public static readonly FindOneDaoError = "There is some error in finding one plot"
+    public static readonly FindOneAlreadyExistDaoError = "The plot with given id does not exist"
+    public static readonly UpdatePlotDao = "Updation Plot Initiated in Dao" 
+    public static readonly UpdatePlotErrorDao = "There is some error in updating plot in Dao"
+    public static readonly DeletePlotDao = "Property Deletion initiated in Dao"
+    public static readonly DeletePlotSuccessDao = "Property Deleted successfully in Dao"
+    public static readonly DeletePlotErrorDao = "There is some issue in plot deletion in Dao"
+    public static readonly PlotAggregationDao = "Plot Aggregation Initiated in Dao"
+    public static readonly PlotAggregationErrorDao = "There is some error Plot Aggregation in Dao"
+}
