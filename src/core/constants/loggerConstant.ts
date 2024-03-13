@@ -21,7 +21,7 @@ export class LoggerConstant{
     public static readonly PlotAggregationErrorService = "There is some error Plot Aggregation in Service"
 
     //Loggers in Dao
-    public static readonly CreatePlotDao = "Creation Plot Initiated in service"
+    public static readonly CreatePlotDao = "Creation Plot Initiated in dao"
     public static readonly CreatePlotDaoError = "There is some error in Creation Plot"
     public static readonly FindAllDao = "Find All Plot Initiated in Dao"
     public static readonly FindAllDaoError = "There is some error in Finding all plots"
