@@ -3,8 +3,9 @@ import { Plot } from 'src/core/interface/plot.interface';
 import { PlotService } from './plot.service';
 import { PlotAggregationDto } from 'src/core/dto/priceAggregation.dto';
 import { LoggerConstant } from 'src/core/constants/loggerConstant';
+import { appConfig } from 'src/core/config/appConfig';
 
-@Controller('plot')
+@Controller(appConfig.controllerName)
 export class PlotController {
   private readonly logger = new Logger(PlotController.name);
   constructor(private readonly plotService: PlotService) { }
@@ -22,7 +23,7 @@ export class PlotController {
     }
   }
 
-  @Get('aggregateByPrice')
+  @Get(appConfig.plotaggregateByPrice)
   async aggregateByPrice(@Query() plotAggregationDto: PlotAggregationDto): Promise<Plot[]> {
     this.logger.log(LoggerConstant.PlotAggregationController);
     try {
@@ -36,8 +37,8 @@ export class PlotController {
     }
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() plot: Plot): Promise<Plot> {
+  @Put(appConfig.plotParamId)
+  async update(@Param(appConfig.plotId) id: string, @Body() plot: Plot): Promise<Plot> {
     this.logger.log(LoggerConstant.UpdatePlotController);
     try {
       const updatedPlot = await this.plotService.update(id, plot);
@@ -47,8 +48,8 @@ export class PlotController {
     }
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string): Promise<void> {
+  @Delete(appConfig.plotParamId)
+  async delete(@Param(appConfig.plotId) id: string): Promise<void> {
     this.logger.log(LoggerConstant.DeletePlotController);
     try {
       await this.plotService.delete(id);

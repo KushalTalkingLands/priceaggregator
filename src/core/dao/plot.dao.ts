@@ -110,7 +110,7 @@ export class PlotDao {
       return result;
     } catch (error) {
       this.logger.error(LoggerConstant.PlotAggregationErrorDao);
-      throw new HttpException('Error aggregating plots by price', HttpStatus.BAD_REQUEST);
+      throw new HttpException(ExceptionConstant.PlotAggregate, HttpStatus.BAD_REQUEST);
     }
   }
 }
