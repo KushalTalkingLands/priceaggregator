@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DbModule } from './db/db.module';
 
 @Module({
-  imports: [PlotModule, DbModule],
+  imports: [PlotModule],
   controllers: [],
   providers: [],
 })

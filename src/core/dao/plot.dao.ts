@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Plot } from '../interface/plot.interface';
 import { PlotAggregationDto } from '../dto/priceAggregation.dto';
@@ -10,7 +10,7 @@ import { dbConfig } from '../config/dbConfig';
 @Injectable()
 export class PlotDao {
   private readonly logger = new Logger(PlotDao.name);
-  constructor(@InjectModel(dbConfig.Model) private readonly plotModel: Model<Plot>) { }
+  constructor(@Inject(dbConfig.Model) private readonly plotModel: Model<Plot>) { }
 
   async create(plot: Plot): Promise<Plot> {
     this.logger.log(LoggerConstant.CreatePlotDao);
