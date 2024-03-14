@@ -5,11 +5,12 @@ import { Plot } from '../interface/plot.interface';
 import { PlotAggregationDto } from '../dto/priceAggregation.dto';
 import { LoggerConstant } from '../constants/loggerConstant';
 import { ExceptionConstant } from '../constants/ExceptionConstant';
+import { dbConfig } from '../config/dbConfig';
 
 @Injectable()
 export class PlotDao {
   private readonly logger = new Logger(PlotDao.name);
-  constructor(@InjectModel('Plot') private readonly plotModel: Model<Plot>) { }
+  constructor(@InjectModel(dbConfig.Model) private readonly plotModel: Model<Plot>) { }
 
   async create(plot: Plot): Promise<Plot> {
     this.logger.log(LoggerConstant.CreatePlotDao);
