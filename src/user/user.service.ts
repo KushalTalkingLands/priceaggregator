@@ -2,6 +2,8 @@ import { Injectable, ConflictException, NotFoundException, UnauthorizedException
 import { UserDao } from 'src/core/dao/user.dao';
 import { CreateUserDto,UserSignInDto } from 'src/core/dto/user.dto';
 import { generateJwtToken,hashPassword,comparePasswords } from 'src/core/helper/user.helper';
+import { ExceptionConstant } from 'src/core/constants/ExceptionConstant';
+import { appConstant } from 'src/core/constants/appConstant';
 
 @Injectable()
 export class UserService {
@@ -13,7 +15,7 @@ async signUp(createUserDto: CreateUserDto): Promise<any> {
     // Check if the username already exists
     const existingUser = await this.userDao.findByUsername(username);
     if (existingUser) {
-      throw new ConflictException('Username already exists.');
+      throw new ConflictException(ExceptionConstant.ConflictException);
     }
 
     // Hash the password
@@ -31,25 +33,25 @@ async signUp(createUserDto: CreateUserDto): Promise<any> {
     const user = await this.userDao.findByUsername(username);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials.');
+      throw new UnauthorizedException(ExceptionConstant.UnauthorizedException);
     }
 
     // Compare entered password with stored hashed password
     const passwordMatch = await comparePasswords(password, user.password);
 
     if (!passwordMatch) {
-      throw new UnauthorizedException('Invalid credentials.');
+      throw new UnauthorizedException(ExceptionConstant.UnauthorizedException);
     }
     const token = generateJwtToken(user.username,user.role);
 
-    return { message:"Signed in successfully",token };
+    return { message:appConstant.UserSignedIn,token };
   }
 
   async findUserByUsername(username: string): Promise<any> {
     const user = await this.userDao.findByUsername(username);
 
     if (!user) {
-      throw new NotFoundException('User not found.');
+      throw new NotFoundException(ExceptionConstant.NotFoundException);
     }
 
     return user;
@@ -61,7 +63,7 @@ async signUp(createUserDto: CreateUserDto): Promise<any> {
     return this.userDao.updatePassword(user.username, newPassword);
     }
     else{
-        throw new NotFoundException('User not found.');
+        throw new NotFoundException(ExceptionConstant.NotFoundException);
     }
   }
 }

@@ -1,9 +1,10 @@
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { CreateUserDto } from '../dto/user.dto';;
+import { CreateUserDto } from '../dto/user.dto';
+import { appConfig } from '../config/appConfig';
 
-const jwtSecretKey = 'This is a test secret key';
+const jwtSecretKey = appConfig.jwtToken;
 
 export const generateJwtToken = (username: string,role: string): string => {
   return jwt.sign({ username,role }, jwtSecretKey, { expiresIn: '1h' }); // Set token expiration as needed

@@ -4,10 +4,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from '../dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import { hashPassword } from '../helper/user.helper';
+import { dbConfig } from '../config/dbConfig';
+import { appConstant } from '../constants/appConstant';
 
 @Injectable()
 export class UserDao {
-  constructor(@Inject('User') private readonly userModel: Model<any>) {}
+  constructor(@Inject(dbConfig.userModel) private readonly userModel: Model<any>) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<any> {
     const { username, password,role } = createUserDto;
@@ -20,7 +22,7 @@ export class UserDao {
 
     let data = await createdUser.save();
     return {
-        message: "User created successfully",
+        message: appConstant.UserCreated,
         id: data._id
     }
   }
